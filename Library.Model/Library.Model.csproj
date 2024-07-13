@@ -41,11 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\Result.cs" />
     <Compile Include="Interfaces\IRepositories\IUserRepository.cs" />
     <Compile Include="Model\Users\UserAddModel.cs" />
     <Compile Include="Model\Users\UserLoginModel.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helper\Errors\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

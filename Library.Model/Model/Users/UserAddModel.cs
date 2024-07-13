@@ -93,6 +93,10 @@ namespace Library.Model.Model.Users
             }
         }
 
+
+        /// <summary>
+        /// for detect admin users
+        /// </summary>
         private bool _isAdmin;
 
         public bool IsAdmin
