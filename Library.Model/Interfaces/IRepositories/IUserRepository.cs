@@ -30,6 +30,12 @@ namespace Library.Model.Interfaces.IRepositories
         /// <returns></returns>
         Task<Result<ObservableCollection<UserAddModel>>> GetAllUsers();
         /// <summary>
+        /// Get a user by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<Result<UserAddModel>> GetUserById(int id);
+        /// <summary>
         /// login a user
         /// </summary>
         /// <param name="username"></param>

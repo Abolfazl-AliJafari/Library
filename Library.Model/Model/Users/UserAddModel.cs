@@ -12,6 +12,7 @@ namespace Library.Model.Model.Users
             string firstName,
             string lastName,
             string mobileNumer,
+            string email,
             string userName,
             string passWord,
             bool isAdmin)
@@ -19,6 +20,7 @@ namespace Library.Model.Model.Users
             FirstName = firstName;
             LastName = lastName;
             MobileNumber = mobileNumer;
+            Email = email;
             UserName = userName;
             PassWord = passWord;
             IsAdmin = isAdmin;
@@ -65,6 +67,21 @@ namespace Library.Model.Model.Users
                 RaisePropertyChanged("MobileNumber");
             }
         }
+
+        private string _email;
+
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                if (_email == value)
+                    return;
+                _email = value;
+                RaisePropertyChanged("Email");
+            }
+        }
+
         private string _userName;
 
         public string UserName

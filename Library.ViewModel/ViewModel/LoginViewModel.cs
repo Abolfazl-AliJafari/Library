@@ -1,4 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using Library.DbService.Repositories;
+using Library.Model.Interfaces.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,10 +12,11 @@ using System.Windows;
 namespace Library.ViewModel.ViewModel
 {
     public class LoginViewModel :BaseViewModel
-    { 
+    {
+        private readonly IUserRepository _userRepository;
         public LoginViewModel()
         {
-
+            _userRepository = new UserRepository();
         }
 
         #region Property
@@ -72,7 +75,18 @@ namespace Library.ViewModel.ViewModel
 
 
         #region Method
-        
+        private void Login(string username, string password)
+        {
+            var result = _userRepository.Login(username, password);
+            if (result.Result.IsSuccess)
+            {
+                
+            }
+            else
+            {
+
+            }
+        }
         #endregion
     }
 }
