@@ -79,6 +79,10 @@
       <Project>{de623947-eb55-4614-ad9b-38c48a2be9a5}</Project>
       <Name>Library.DbService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Library.Model\Library.Model.csproj">
+      <Project>{c3805475-a0ce-4c6f-977a-0bcccc850441}</Project>
+      <Name>Library.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
