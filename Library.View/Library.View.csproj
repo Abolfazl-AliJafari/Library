@@ -119,6 +119,20 @@
     <Folder Include="View\AdminUserMenu\" />
     <Folder Include="View\NormalUserMenu\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Library.DbService\Library.DbService.csproj">
+      <Project>{de623947-eb55-4614-ad9b-38c48a2be9a5}</Project>
+      <Name>Library.DbService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library.Model\Library.Model.csproj">
+      <Project>{c3805475-a0ce-4c6f-977a-0bcccc850441}</Project>
+      <Name>Library.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library.ViewModel\Library.ViewModel.csproj">
+      <Project>{9fefac9e-e4b4-469d-b717-6ee37544607c}</Project>
+      <Name>Library.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

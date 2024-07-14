@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,44 @@ namespace Library.View.View
         public LoginPage()
         {
             InitializeComponent();
+            Login();
+
+            int x = 5;
+            f(x);//call by value
+            Debug.WriteLine(x);//5
+
+            //person person = new person()
+            //{
+            //    name = "saeed"
+            //};
+            //setName(person);
+            //Debug.WriteLine(person.name);//abc
         }
+
+        async Task Login()
+        {
+            var res = await Library.DbService.Repositories.UserRepository.Login("admin", "123");
+
+        }
+
+        //out
+        //ref
+        //in
+
+        void f(int x)//5
+        {
+            x++;//6
+            Debug.WriteLine(x);//6
+        }
+
+        void setName(person _person)
+        {
+            _person.name = "abc";
+        }
+        public class person
+        {
+            public string name;
+        }
+
     }
 }

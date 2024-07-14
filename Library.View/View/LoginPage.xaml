@@ -39,60 +39,48 @@
             </Grid.RowDefinitions>
 
             <Border
-         Grid.Row="0"
-         Background="DarkMagenta">
+                Grid.Row="0"
+                Background="DarkMagenta">
                 <TextBlock
-             Foreground="White"
-             FontSize="30"
-             HorizontalAlignment="Center"
-             VerticalAlignment="Center"
-             Text="Welcome"/>
+                    Foreground="White"
+                    FontSize="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="Welcome"/>
             </Border>
-
             <Border
-         MaxWidth="300"
-         Margin="50 10"
-         Grid.Row="1">
+                 MaxWidth="300"
+                 Margin="50 10"
+                 Grid.Row="1">
                 <StackPanel
-             Orientation="Vertical">
+                    Orientation="Vertical">
                     <Ellipse
-                 Margin="8 4"
-                 Height="100" 
-                 Stroke="Black" 
-                 Width="100"/>
-
+                         Margin="8 4"
+                         Height="100" 
+                         Stroke="Black" 
+                         Width="100"/>
                     <TextBox
-                 HorizontalContentAlignment="Center"
-                 VerticalContentAlignment="Center"
-                 Margin="8 4"
-                 Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        materialDesign:HintAssist.Hint="UserName"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Margin="8 4"
+                        Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     </TextBox>
                     <TextBox
-                       
-                 Text="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                 HorizontalContentAlignment="Center"
-                 VerticalContentAlignment="Center"
-                 Margin="8 4">
+                        materialDesign:HintAssist.Hint="Password"
+                        Text="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Margin="8 4">
                     </TextBox>
-
-                    <CheckBox
-                 IsChecked="{Binding ShowButton,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-
                     <Button
-                 Visibility="{Binding ShowButton,Converter={StaticResource BooleanToVisConverter}}"
-                 Command="{Binding LoginCommand}"
-                 Margin="8 4"
-                 Content="login">
+                        Visibility="{Binding ShowButton,Converter={StaticResource BooleanToVisConverter}}"
+                        Command="{Binding LoginCommand}"
+                        Margin="8 4"
+                        Content="login">
                     </Button>
-
                 </StackPanel>
-
             </Border>
-
-
-
-
-
         </Grid>
     </Grid>
 </Window>
