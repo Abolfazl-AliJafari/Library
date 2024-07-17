@@ -77,15 +77,15 @@ namespace Library.ViewModel.ViewModel
         #region Method
         private void Login(string username, string password)
         {
-            var result = _userRepository.Login(username, password);
-            if (result.Result.IsSuccess)
-            {
+            //var result = _userRepository.Login(username, password);
+            //if (result.Result.IsSuccess)
+            //{
                 
-            }
-            else
-            {
+            //}
+            //else
+            //{
 
-            }
+            //}
         }
         #endregion
     }

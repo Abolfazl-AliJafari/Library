@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Library.View.View
+namespace Library.View.View.AdminUser
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
+    /// Interaction logic for AdminHomePage.xaml
     /// </summary>
-    public partial class LoginPage : Window
+    public partial class AdminHomePage : Window
     {
-        public LoginPage()
+        public AdminHomePage()
         {
             InitializeComponent();
         }

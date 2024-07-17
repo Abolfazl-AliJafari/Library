@@ -41,6 +41,6 @@ namespace Library.Model.Interfaces.IRepositories
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        Task<Result<UserLoginModel>> Login(string username, string password);
+        Task<Result<bool>> Login(string username, string password);
     }
 }
