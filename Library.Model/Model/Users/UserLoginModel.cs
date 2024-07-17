@@ -9,14 +9,31 @@ namespace Library.Model.Model.Users
     public class UserLoginModel : BaseModel
     {
         public UserLoginModel(
+            string fullName,
             string userName,
             string passWord,
             bool isAdmin)
         {
+            FullName = fullName;
             UserName = userName;
             PassWord = passWord;
             IsAdmin = isAdmin;
         }
+
+        private string _fullName;
+
+        public string FullName
+        {
+            get { return _fullName; }
+            set
+            {
+                if (_fullName == value)
+                    return;
+                _fullName = value;
+                RaisePropertyChanged("FullName");
+            }
+        }
+
         private string _userName;
 
         public string UserName

@@ -12,19 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Library.View.View
+namespace Library.View.View.AdminUser
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for AdminHomePage.xaml
     /// </summary>
-    public partial class HomePage : Window
+    public partial class AdminHomePage : Window
     {
-        private readonly bool _isAdmin;
-        public HomePage(bool isAdmin)
+        public AdminHomePage()
         {
-            _isAdmin = isAdmin;
             InitializeComponent();
         }
-
     }
 }

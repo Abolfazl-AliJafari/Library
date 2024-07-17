@@ -1,0 +1,150 @@
+﻿<Window x:Class="Library.View.View.AdminUser.AdminHomePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Library.View.View.AdminUser"
+        mc:Ignorable="d"
+        Title="AdminHomePage" Height="450" Width="800"
+        >
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Grid FlowDirection="RightToLeft">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock 
+                        FontWeight="Bold"
+                        Margin="4 8 0 0"
+                        Grid.Row="0"
+                        Text="نام و نام خانوادگی"
+                        />
+                    <TextBlock 
+                        Margin="4 8 0 0"
+                        Grid.Row="1"
+                        Text="سمت کاربر"
+                        FontSize="13"
+                        FontWeight="Heavy"
+                        />
+                </Grid>
+                <TextBlock
+                    Grid.Column="1"
+                    Text="نام کتابخانه"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Width="auto"
+                    />
+            </Grid>
+        </Grid>
+
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Name="UsersMenu_Btn"
+                BorderThickness="0"
+                Background="Transparent"
+                Grid.Row="1"
+                >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Text="کاربران"
+                        Foreground="Black"
+                    />
+                    <materialDesign:PackIcon
+                        Grid.Column="1" 
+                        Kind="AccountGroup"
+                        Foreground="Black"/>
+                </Grid>
+            </Button>
+            <Button
+                BorderThickness="0"
+                Background="Transparent"
+                Grid.Row="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Text="کتاب ها"
+                        Foreground="Black"/>
+                    <materialDesign:PackIcon
+                        Grid.Column="1" 
+                        Kind="Book"
+                        Foreground="Black"/>
+                </Grid>
+            </Button>
+            <Button
+                BorderThickness="0"
+                Background="Transparent"
+                Grid.Row="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock 
+                        Grid.Column="0"
+                        Text="امانتداری"
+                        Foreground="Black"/>
+                    <materialDesign:PackIcon
+                        Grid.Column="1" 
+                        Kind="BeakerOutline"
+                        Foreground="Black"/>
+                </Grid>
+            </Button>
+            <Button
+                BorderThickness="0"
+                Background="Transparent"
+                Grid.Row="4">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon
+                        Grid.Column="1" 
+                        Kind="Logout"
+                        Foreground="Black"/>
+                    <TextBlock
+                        Text="خروج"
+                        Foreground="Black"/>
+                </Grid>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

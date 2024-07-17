@@ -15,7 +15,7 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}">
-        <!--<Window.Resources>
+        <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
@@ -24,11 +24,11 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Purple.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>-->
+    </Window.Resources>
     <Grid>
         <Grid.Resources>
 
-            <converters:BoleanToVisibilityConverter x:Key="BooleanToVisConverter"/>
+            <converters:BoleanToVisibilityConverter x:Key="BoleanToVisibilityConverter"/>
         </Grid.Resources>
         <Grid>
             <Grid.RowDefinitions>
@@ -58,7 +58,8 @@
                          Margin="8 4"
                          Height="100" 
                          Stroke="Black" 
-                         Width="100"/>
+                         Width="100">
+                    </Ellipse>
                     <TextBox
                         materialDesign:HintAssist.Hint="UserName"
                         HorizontalContentAlignment="Center"
@@ -74,7 +75,7 @@
                         Margin="8 4">
                     </TextBox>
                     <Button
-                        Visibility="{Binding ShowButton,Converter={StaticResource BooleanToVisConverter}}"
+                        Visibility="{Binding ShowButton,Converter={StaticResource BoleanToVisibilityConverter}}"
                         Command="{Binding LoginCommand}"
                         Margin="8 4"
                         Content="login">

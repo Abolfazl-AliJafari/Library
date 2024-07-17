@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:Library.View"
                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
-             StartupUri="View/LoginPage.xaml">
+             StartupUri="View/AdminUser/AdminHomePage.xaml">
 
     <Application.Resources>
         <ResourceDictionary>
