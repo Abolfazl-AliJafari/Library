@@ -1,4 +1,5 @@
-﻿using Library.Model.Helper;
+﻿using Library.DbService.Mappers.Users;
+using Library.Model.Helper;
 using Library.Model.Helper.Exceptions;
 using Library.Model.Interfaces.IRepositories;
 using Library.Model.Model.Users;
@@ -15,11 +16,48 @@ namespace Library.DbService.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private ObservableCollection<UserAddModel> _users;
-        public UserRepository() { _users = new ObservableCollection<UserAddModel>(); }
+        public UserRepository() { }
         public Task<Result> AddUser(UserAddModel user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(Properties.Settings.Default.SqlServerConnectionString))
+                using (SqlCommand sqlCommand = new SqlCommand("AddUser", sqlConnection))
+                {
+                    sqlConnection.Open();
+
+                    sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    var FirstName = sqlCommand.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
+                    FirstName.Size = 40;
+
+                    var LastName = sqlCommand.Parameters.Add(new SqlParameter("@LastName", user.LastName));
+                    LastName.Size = 70;
+
+
+                    var MobileNumber = sqlCommand.Parameters.Add(new SqlParameter("@MobileNumber", user.MobileNumber));
+                    MobileNumber.Size = 11;
+
+                    var EmailAddress = sqlCommand.Parameters.Add(new SqlParameter("@EmailAddress", user.Email));
+                    EmailAddress.Size = 150;
+
+                    var UserName = sqlCommand.Parameters.Add(new SqlParameter("@UserName", user.UserName));
+                    UserName.Size = 30;
+
+                    var PassWord = sqlCommand.Parameters.Add(new SqlParameter("@PassWord", user.PassWord));
+                    PassWord.Size = 16;
+                    var IsAdmin = sqlCommand.Parameters.Add(new SqlParameter("@IsAdmin", user.IsAdmin));
+                    IsAdmin.SqlDbType = SqlDbType.Bit;
+                    sqlCommand.ExecuteNonQuery();
+                }
+
+                return Task.FromResult(Result.Success());
+            }
+            catch (Exception ex)
+            {
+                //ToDo : Implement Log Errors
+                return Task.FromResult(Result.Failure(ExceptionMessages.SomethingWentWrong));
+            }
         }
 
         public Task<Result<ObservableCollection<UserAddModel>>> GetAllUsers()
@@ -31,10 +69,10 @@ namespace Library.DbService.Repositories
                 using (SqlConnection sqlConnection = new SqlConnection(Properties.Settings.Default.SqlServerConnectionString))
                 using (SqlCommand sqlCommand = new SqlCommand("GetAllUser", sqlConnection))
                 {
-                    sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlConnection.Open();
                     dataTable.Load(sqlCommand.ExecuteReader());
-                    return Task.FromResult(Result<ObservableCollection<UserAddModel>>.Success(DataTableToObservable(dataTable)));
+                    return Task.FromResult(Result<ObservableCollection<UserAddModel>>.Success(UserAddModelMapper.DataTableToModels(dataTable)));
                 }
             }
             catch (Exception ex)
@@ -44,41 +82,35 @@ namespace Library.DbService.Repositories
             }
         }
 
-        /// <summary>
-        /// Map DataTable to observable collection
-        /// </summary>
-        /// <param name="dataTable"></param>
-        /// <returns></returns>
-        private ObservableCollection<UserAddModel> DataTableToObservable(DataTable dataTable)
-        {
-            ObservableCollection<UserAddModel> users = new ObservableCollection<UserAddModel>();
-            foreach (DataRow row in dataTable.Rows)
-            {
-                UserAddModel user = new UserAddModel(
-                    row["FirstName"].ToString(),
-                    row["LastName"].ToString(),
-                    row["MobileNumber"].ToString(),
-                    row["Email"].ToString(),
-                    row["UserName"].ToString(),
-                    row["PassWord"].ToString(),
-                    (bool)(dataTable.Rows[0]["IsAdmin"] as bool?));
-                users.Add(user);
-            }
-            return users;
-        }
-
         public Task<Result<UserAddModel>> GetUserById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static Task<Result<UserLoginModel>> Login(string username, string password)
         {
             DataTable dataTable = new DataTable();
             try
             {
-                string errorMes = "";
+                using (SqlConnection sqlConnection = new SqlConnection(Properties.Settings.Default.SqlServerConnectionString))
+                using (SqlCommand sqlCommand = new SqlCommand("GetUserById", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    var UserName = sqlCommand.Parameters.Add(new SqlParameter("@VarId", id));
 
+                    sqlConnection.Open();
+                    dataTable.Load(sqlCommand.ExecuteReader());
+                    return Task.FromResult(Result<UserAddModel>.Success(UserAddModelMapper.DataTableToModel(dataTable)));
+                }
+            }
+            catch (Exception ex)
+            {
+                //ToDo : Implement Log Errors
+                return Task.FromResult(Result<UserAddModel>.Failure(ExceptionMessages.SomethingWentWrong, null));
+            }
+        }
+
+        public Task<Result<bool>> Login(string username, string password)
+        {
+            try
+            {
+                string errorMessage = "";
+                var returnValue = "";
                 using (SqlConnection sqlConnection = new SqlConnection(Properties.Settings.Default.SqlServerConnectionString))
                 using (SqlCommand sqlCommand = new SqlCommand("Login", sqlConnection))
                 {
@@ -92,10 +124,10 @@ namespace Library.DbService.Repositories
                     var VarPassW = sqlCommand.Parameters.Add(new SqlParameter("@VarPassWord", password));
                     VarPassW.Size = 30;
 
-                    var errorMesParam = sqlCommand.Parameters.Add(new SqlParameter("@errorMes", ""));
+                    var errorMesParam = sqlCommand.Parameters.Add(new SqlParameter("@ErrorMes", ""));
                     errorMesParam.SqlDbType = SqlDbType.NVarChar;
                     errorMesParam.Size = 1001;
-                    errorMesParam.Direction = System.Data.ParameterDirection.Output;
+                    errorMesParam.Direction = ParameterDirection.Output;
 
                     var returnParameter = sqlCommand.Parameters.Add("@ReturnVal", SqlDbType.Int);
                     returnParameter.Direction = ParameterDirection.ReturnValue;
@@ -103,32 +135,46 @@ namespace Library.DbService.Repositories
 
                     sqlCommand.ExecuteNonQuery();
 
-                    var ret = sqlCommand.Parameters["@ReturnVal"].Value.ToString();
-                    errorMes = sqlCommand.Parameters["@errorMes"].Value.ToString();
+                    returnValue = sqlCommand.Parameters["@ReturnVal"].Value.ToString();
+                    errorMessage = sqlCommand.Parameters["@ErrorMes"].Value.ToString();
 
                 }
 
 
-                if (dataTable.Rows.Count == 1)
+                if (returnValue == "1")
                 {
-                    UserLoginModel user = new UserLoginModel(
-                       dataTable.Rows[0]["UserName"].ToString(),
-                       dataTable.Rows[0]["PassWord"].ToString(),
-                       (bool)(dataTable.Rows[0]["IsAdmin"] as bool?));
-                    return Task.FromResult(Result<UserLoginModel>.Success(user));
+                    
+                    return Task.FromResult(Result<bool>.Success(true));
                 }
-                return Task.FromResult(Result<UserLoginModel>.Failure(null));
+                return Task.FromResult(Result<bool>.Failure(false));
             }
             catch (Exception ex)
             {
                 //ToDo : Implement Log Errors
-                return Task.FromResult(Result<UserLoginModel>.Failure(ExceptionMessages.SomethingWentWrong, null));
+                return Task.FromResult(Result<bool>.Failure(ExceptionMessages.SomethingWentWrong, false));
             }
         }
 
         public Task<Result> RemoveUser(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(Properties.Settings.Default.SqlServerConnectionString))
+                using (SqlCommand sqlCommand = new SqlCommand("DeleteUser", sqlConnection))
+                {
+                    sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+                    var Id = sqlCommand.Parameters.Add(new SqlParameter("@VarId", id));
+
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteReader();
+                    return Task.FromResult(Result.Success());
+                }
+            }
+            catch (Exception ex)
+            {
+                //ToDo : Implement Log Errors
+                return Task.FromResult(Result.Failure(ExceptionMessages.SomethingWentWrong));
+            }
         }
     }
 }
