@@ -60,7 +60,7 @@ namespace Library.DbService.Repositories
             }
         }
 
-        public Task<Result<ObservableCollection<UserAddModel>>> GetAllUsers()
+        public Task<Result<ObservableCollection<UserShowModel>>> GetAllUsers()
         {
 
             DataTable dataTable = new DataTable();
@@ -72,13 +72,13 @@ namespace Library.DbService.Repositories
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlConnection.Open();
                     dataTable.Load(sqlCommand.ExecuteReader());
-                    return Task.FromResult(Result<ObservableCollection<UserAddModel>>.Success(UserAddModelMapper.DataTableToModels(dataTable)));
+                    return Task.FromResult(Result<ObservableCollection<UserShowModel>>.Success(UserShowModelMapper.DataTableToModels(dataTable)));
                 }
             }
             catch (Exception ex)
             {
                 //ToDo : Implement Log Errors
-                return Task.FromResult(Result<ObservableCollection<UserAddModel>>.Failure(ExceptionMessages.SomethingWentWrong, null));
+                return Task.FromResult(Result<ObservableCollection<UserShowModel>>.Failure(ExceptionMessages.SomethingWentWrong, null));
             }
         }
 
@@ -143,7 +143,7 @@ namespace Library.DbService.Repositories
 
                 if (returnValue == "1")
                 {
-                    
+
                     return Task.FromResult(Result<bool>.Success(true));
                 }
                 return Task.FromResult(Result<bool>.Failure(false));
@@ -175,6 +175,11 @@ namespace Library.DbService.Repositories
                 //ToDo : Implement Log Errors
                 return Task.FromResult(Result.Failure(ExceptionMessages.SomethingWentWrong));
             }
+        }
+
+        Task<Result<ObservableCollection<UserAddModel>>> IUserRepository.GetAllUsers()
+        {
+            throw new NotImplementedException();
         }
     }
 }
