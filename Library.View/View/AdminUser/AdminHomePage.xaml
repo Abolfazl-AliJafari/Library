@@ -4,17 +4,180 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converters ="clr-namespace:Library.View.View.Converters"
         xmlns:local="clr-namespace:Library.View.View.AdminUser"
+        xmlns:viewmodels ="clr-namespace:Library.ViewModel.ViewModel;assembly=Library.ViewModel"
         mc:Ignorable="d"
+        FlowDirection="RightToLeft"
         Title="AdminHomePage" Height="450" Width="800"
         >
-    <Grid >
+    <Window.Resources>
+        <viewmodels:AdminHomePageViewModel x:Key="viewmodel"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource viewmodel}">
+        <Grid.Resources>
+            <converters:BoleanToColor_MenuConverter x:Key="BoleanToColor_MenuConverter"/>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <Border
+            BorderBrush="AliceBlue"
+            Grid.Column="0"
+            BorderThickness="1"
+            CornerRadius="5">
+
+            <ListBox
+                HorizontalAlignment="Stretch"
+                SelectedIndex="{Binding MenuIndex ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding CurrentMenu ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding Menu ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel
+                            Margin="4 2"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                            <TextBlock
+                                Margin="4 2"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Grid.Column="0"
+                                Text="{Binding Title,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                                Foreground="Black"/>
+                            <materialDesign:PackIcon
+                                Margin="4 2"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Grid.Column="1" 
+                                Kind="{Binding Icon ,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                                Foreground="Black"/>
+                        </StackPanel>   
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+            <!--<Grid 
+                Margin="4 8"
+                VerticalAlignment="Top"
+                Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            
+                <RadioButton
+                    Margin="8 0"
+                    Cursor="Hand"
+                    MaxWidth="230"
+                    MaxHeight="90"
+                    Style="{StaticResource MaterialDesignTabRadioButtonRight}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Name="UsersMenu_Btn"
+                    BorderThickness="0"
+                    IsChecked="{Binding UsersSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    Background="{Binding UsersSelected,Converter={StaticResource BoleanToColor_MenuConverter}}"
+                    Grid.Row="1"
+                    >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="کاربران"
+                            Foreground="Black"
+                        />
+                        <materialDesign:PackIcon
+                            Grid.Column="1" 
+                            Kind="AccountGroup"
+                            Foreground="Black"/>
+                    </Grid>
+                </RadioButton>
+                <RadioButton
+                    Cursor="Hand"
+                    Margin="8 0"
+                    MaxWidth="230"
+                    MaxHeight="90"
+                    Style="{StaticResource MaterialDesignTabRadioButtonRight}"
+                    BorderThickness="0"
+                    IsChecked="{Binding BooksSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    Background="{Binding BooksSelected,Converter={StaticResource BoleanToColor_MenuConverter}}"
+                    Grid.Row="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Row="0"
+                            Text="کتاب ها"
+                            Foreground="Black"/>
+                        <materialDesign:PackIcon
+                            Grid.Column="1" 
+                            Kind="Book"
+                            Foreground="Black"/>
+                    </Grid>
+                </RadioButton>
+                <RadioButton
+                    Cursor="Hand"
+                    Margin="8 0"
+                    MaxWidth="230"
+                    MaxHeight="90"
+                    Style="{StaticResource MaterialDesignTabRadioButtonRight}"
+                    BorderThickness="0"
+                    IsChecked="{Binding BailmentSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    Background="{Binding BailmentSelected,Converter={StaticResource BoleanToColor_MenuConverter}}"
+                    Grid.Row="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock 
+                            Grid.Column="0"
+                            Text="امانتداری"
+                            Foreground="Black"/>
+                        <materialDesign:PackIcon
+                            Grid.Column="1" 
+                            Kind="BeakerOutline"
+                            Foreground="Black"/>
+                    </Grid>
+                </RadioButton>
+                <RadioButton
+                    Cursor="Hand"
+                    Margin="8 0"
+                    MaxWidth="230"
+                    MaxHeight="90"
+                    Style="{StaticResource MaterialDesignTabRadioButtonRight}"
+                    BorderThickness="0"
+                    Grid.Row="4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:PackIcon
+                            Grid.Column="1" 
+                            Kind="Logout"
+                            Foreground="Black"/>
+                        <TextBlock
+                            Text="خروج"
+                            Foreground="Black"/>
+                    </Grid>
+                </RadioButton>
+            </Grid>-->
+        </Border>
+        
+        <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="5*"/>
@@ -53,98 +216,12 @@
                     Width="auto"
                     />
             </Grid>
-        </Grid>
-
-
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1.5*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Button
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Name="UsersMenu_Btn"
-                BorderThickness="0"
-                Background="Transparent"
+            <Frame 
+                Content="{Binding CurrentPage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 Grid.Row="1"
-                >
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        Grid.Column="0"
-                        Text="کاربران"
-                        Foreground="Black"
-                    />
-                    <materialDesign:PackIcon
-                        Grid.Column="1" 
-                        Kind="AccountGroup"
-                        Foreground="Black"/>
-                </Grid>
-            </Button>
-            <Button
-                BorderThickness="0"
-                Background="Transparent"
-                Grid.Row="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        Text="کتاب ها"
-                        Foreground="Black"/>
-                    <materialDesign:PackIcon
-                        Grid.Column="1" 
-                        Kind="Book"
-                        Foreground="Black"/>
-                </Grid>
-            </Button>
-            <Button
-                BorderThickness="0"
-                Background="Transparent"
-                Grid.Row="3">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Grid.Column="0"
-                        Text="امانتداری"
-                        Foreground="Black"/>
-                    <materialDesign:PackIcon
-                        Grid.Column="1" 
-                        Kind="BeakerOutline"
-                        Foreground="Black"/>
-                </Grid>
-            </Button>
-            <Button
-                BorderThickness="0"
-                Background="Transparent"
-                Grid.Row="4">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <materialDesign:PackIcon
-                        Grid.Column="1" 
-                        Kind="Logout"
-                        Foreground="Black"/>
-                    <TextBlock
-                        Text="خروج"
-                        Foreground="Black"/>
-                </Grid>
-            </Button>
+                NavigationUIVisibility="Hidden">
+            </Frame>
         </Grid>
+
     </Grid>
 </Window>

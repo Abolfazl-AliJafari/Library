@@ -1,0 +1,63 @@
+﻿<Page x:Class="Library.View.View.AdminUser.AdminUsersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:viewmodels="clr-namespace:Library.ViewModel.ViewModel;assembly=Library.ViewModel"
+      xmlns:local="clr-namespace:Library.View.View.AdminUser"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AdminUsersPage">
+
+    <Border Background="White">
+        <Border.Resources>
+            <viewmodels:AdminUserViewModel x:Key="UserViewModel"/>
+        </Border.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.Row="0"
+                FlowDirection="RightToLeft">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Grid.Column="0"
+                    Text="کاربران"
+                    FontSize="35"
+                    FontWeight="ExtraBlack"
+                    VerticalAlignment="Center"
+                    Margin="8 0 0 0"
+                    />
+                <Button
+                    Grid.Column="1"
+                    Height="40"
+                    Margin="8 0"
+                    Content="دریافت گزارش"
+                    />
+                <Button
+                    Grid.Column="2"
+                    Height="40"
+                    Margin="8 0"
+                    Content="افزودن کاربر"
+                    />
+            </Grid>
+            <DataGrid
+                Grid.Row="1"
+                ItemsSource="{Binding Users,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        Binding="{Binding }"
+                        Header="نام کاربری"
+                        />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+</Page>
