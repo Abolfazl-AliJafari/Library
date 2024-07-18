@@ -5,24 +5,20 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
 
 namespace Library.View.View.Converters
 {
-    internal class BoleanToVisibilityConverter : IValueConverter
+    public class BoleanToColor_MenuConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var show = (value as bool?);
-            if (show ?? false)
+            bool isCheked = (bool)value;
+            if (isCheked)
             {
-                return Visibility.Visible;
+                return "Purple";
             }
-            else
-            {
-                return Visibility.Collapsed;
-            }
+            return "Transparent";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
