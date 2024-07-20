@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using MaterialDesignThemes.Wpf;
+﻿using Library.ViewModel.ViewModel.AdminUser.UserVeiwModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,20 +14,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Library.View.View.AdminUser
+namespace Library.View.View.AdminUser.UsersPage
 {
     /// <summary>
-    /// Interaction logic for AdminUsersPage.xaml
+    /// Interaction logic for AddUserPage.xaml
     /// </summary>
-    public partial class AdminUsersPage : Page
+    public partial class AddUserPage : UserControl
     {
-        public AdminUsersPage()
+        public AddUserPage()
         {
             InitializeComponent();
-            //Messenger.Default.Register(this, "OpenDialog", (UserControl page) =>
-            //{
-            //    DialogHost.ShowDialog(page);
-            //});
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as AddUserViewModel).CloseCommand.Execute(this);
         }
     }
 }

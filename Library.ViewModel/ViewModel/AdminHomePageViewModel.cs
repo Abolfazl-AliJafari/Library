@@ -14,7 +14,6 @@ namespace Library.ViewModel.ViewModel
         public AdminHomePageViewModel()
         {
             FillMenu();
-
             Messenger.Default.Register(this, "ShowView", (Page page) =>
             {
                 CurrentPage = page;

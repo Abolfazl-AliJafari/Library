@@ -28,7 +28,7 @@ namespace Library.Model.Interfaces.IRepositories
         /// get collection of all user
         /// </summary>
         /// <returns></returns>
-        Task<Result<ObservableCollection<UserAddModel>>> GetAllUsers();
+        Task<Result<ObservableCollection<UserShowModel>>> GetAllUsers();
         /// <summary>
         /// Get a user by id
         /// </summary>

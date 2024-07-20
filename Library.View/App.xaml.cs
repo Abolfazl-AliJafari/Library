@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Library.Model.Model.Page;
+using MahApps.Metro.Controls;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,10 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Effects;
 
 namespace Library.View
 {
@@ -30,6 +34,35 @@ namespace Library.View
                 (view as Page).DataContext = viewModel;
 
                 Messenger.Default.Send<Page>(view as Page, "ShowView");
+            });
+
+            Messenger.Default.Register(this, "OpenPopup", (PopupModel Popup) =>
+            {
+                var viewModel = GetInstanceViewModel(Popup.ViewModelPath);
+                var view = GetInstanceView(Popup.ViewPath);
+
+                (view as UserControl).DataContext = viewModel;
+
+                MetroWindow window = new MetroWindow();
+                window.Content = view;
+                window.Topmost = true;
+                window.Height = Popup.Height;
+                window.Width = Popup.Width;
+                window.SaveWindowPosition = true;
+                window.HorizontalAlignment = HorizontalAlignment.Center;
+                window.VerticalAlignment = VerticalAlignment.Center;    
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                window.ResizeMode = ResizeMode.NoResize;
+                window.ShowCloseButton = false;
+                window.WindowTransitionsEnabled = false;
+                window.WindowStyle = WindowStyle.None;
+                window.IsWindowDraggable = false;
+                window.TitleBarHeight = 0;
+                window.Background = null;
+                window.BorderBrush = null;
+                window.AllowsTransparency = true;
+
+                window.ShowDialog();
             });
 
         }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Library.Model.Model.Page;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,7 +12,6 @@ namespace Library.ViewModel.ViewModel
     public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
         public void RaisePropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -18,6 +19,12 @@ namespace Library.ViewModel.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        protected void OpenPopup(PopupModel popup)
+        {
+            Messenger.Default.Send<PopupModel>(popup, "OpenPopup");
+        }
+
     }
 }
 

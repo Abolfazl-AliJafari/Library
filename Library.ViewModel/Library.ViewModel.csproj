@@ -81,6 +81,8 @@
     </Compile>
     <Compile Include="ViewModel\AdminHomePageViewModel.cs" />
     <Compile Include="ViewModel\AdminUserViewModel.cs" />
+    <Compile Include="ViewModel\AdminUser\UserVeiwModels\AddUserViewModel.cs" />
+    <Compile Include="ViewModel\BasePopupViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

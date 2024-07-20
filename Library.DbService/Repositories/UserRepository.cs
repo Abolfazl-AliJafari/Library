@@ -176,10 +176,5 @@ namespace Library.DbService.Repositories
                 return Task.FromResult(Result.Failure(ExceptionMessages.SomethingWentWrong));
             }
         }
-
-        Task<Result<ObservableCollection<UserAddModel>>> IUserRepository.GetAllUsers()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

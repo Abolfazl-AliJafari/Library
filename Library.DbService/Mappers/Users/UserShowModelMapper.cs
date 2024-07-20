@@ -21,7 +21,7 @@ namespace Library.DbService.Mappers.Users
                     row["FirstName"].ToString(),
                     row["LastName"].ToString(),
                     row["MobileNumber"].ToString(),
-                    row["Email"].ToString(),
+                    row["EmailAddress"].ToString(),
                     row["UserName"].ToString(),
                     row["PassWord"].ToString(),
                     (bool)(dataTable.Rows[0]["IsAdmin"] as bool?));

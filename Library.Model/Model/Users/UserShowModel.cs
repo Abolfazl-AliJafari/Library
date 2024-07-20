@@ -19,7 +19,7 @@ namespace Library.Model.Model.Users
            bool isAdmin)
         {
             Id = id;
-            FullName = string.Format("{0}{1}",firstName,lastName);
+            FullName = string.Format("{0} {1}",firstName,lastName);
             MobileNumber = mobileNumer;
             Email = email;
             UserName = userName;
