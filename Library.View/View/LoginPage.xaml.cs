@@ -1,30 +1,17 @@
-﻿using Library.DbService.Repositories;
-using Library.Model.Interfaces.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Library.ViewModel.ViewModel;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Library.View.View
 {
     /// <summary>
     /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class LoginPage : Window
+    public partial class LoginPage : UserControl
     {
         public LoginPage()
         {
             InitializeComponent();
+            DataContext = new LoginViewModel();
         }
     }
 }

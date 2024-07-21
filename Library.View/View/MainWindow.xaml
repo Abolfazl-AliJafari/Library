@@ -1,0 +1,39 @@
+﻿<controls:MetroWindow
+    x:Class="Library.View.View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:Library.View.View"
+    mc:Ignorable="d" 
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:view="clr-namespace:Library.View.View">
+
+    <controls:MetroWindow.LeftWindowCommands>
+        <controls:WindowCommands>
+            <StackPanel>
+                <Button
+                    Command="{Binding LogoutCommand}"
+                    Content="logout"/>
+            </StackPanel>
+        </controls:WindowCommands>
+    </controls:MetroWindow.LeftWindowCommands>
+        
+    <Grid>
+        <materialDesign:Transitioner
+            SelectedIndex="{Binding TransitionSelectedIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <view:LoginPage
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                x:Name="login"/>
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide.ForwardWipe>
+                    <materialDesign:SlideOutWipe />
+                </materialDesign:TransitionerSlide.ForwardWipe>
+                <view:HomeView
+                    x:Name="home"/>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
+    </Grid>
+</controls:MetroWindow>
