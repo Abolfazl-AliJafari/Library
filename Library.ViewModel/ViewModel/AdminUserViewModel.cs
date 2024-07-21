@@ -93,9 +93,9 @@ namespace Library.ViewModel.ViewModel
         private ObservableCollection<UserShowModel> GetAllUser()
         {
             var result = _userRepository.GetAllUsers();
-            if(result.Result.IsSuccess)
+            if(result.IsSuccess)
             {
-                return result.Result.Data;
+                return result.Data;
             }
             return new ObservableCollection<UserShowModel>();
         }

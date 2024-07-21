@@ -25,10 +25,5 @@ namespace Library.View.View.AdminUser.UsersPage
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            (DataContext as AddUserViewModel).CloseCommand.Execute(this);
-        }
     }
 }

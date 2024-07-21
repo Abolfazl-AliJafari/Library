@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Library.Model.Model.Page;
+using Library.View.View.AdminUser;
 using MahApps.Metro.Controls;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -54,17 +55,22 @@ namespace Library.View
                 window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 window.ResizeMode = ResizeMode.NoResize;
                 window.ShowCloseButton = false;
-                window.WindowTransitionsEnabled = false;
                 window.WindowStyle = WindowStyle.None;
                 window.IsWindowDraggable = false;
                 window.TitleBarHeight = 0;
-                window.Background = null;
-                window.BorderBrush = null;
                 window.AllowsTransparency = true;
 
                 window.ShowDialog();
             });
 
+            Messenger.Default.Register(this, "OpenHome", (PageModel page) =>
+            {
+                var viewModel = GetInstanceViewModel(page.ViewModelPath);
+                var view = GetInstanceView(page.ViewPath);
+
+                (view as Window).DataContext = viewModel;
+                (view as Window).ShowDialog();
+            });
         }
 
         public Dictionary<string, Type> ViewModelDictionary { get; private set; }

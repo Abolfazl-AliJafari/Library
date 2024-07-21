@@ -1,6 +1,10 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Library.DbService.Repositories;
 using Library.Model.Interfaces.IRepositories;
+using Library.Model.Model.Page;
+using Library.Model.Model.Users;
+using Library.Model.StaticData;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -8,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 
 namespace Library.ViewModel.ViewModel
 {
@@ -66,7 +71,7 @@ namespace Library.ViewModel.ViewModel
         #region Command
         public RelayCommand LoginCommand => new RelayCommand(() =>
         {
-            MessageBox.Show("login shode");
+            Login(UserName, Password);
         }, () =>
         {
             return string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password) ? false : true;
@@ -77,16 +82,36 @@ namespace Library.ViewModel.ViewModel
         #region Method
         private void Login(string username, string password)
         {
-            //var result = _userRepository.Login(username, password);
-            //if (result.Result.IsSuccess)
-            //{
-                
-            //}
-            //else
-            //{
+            var result = _userRepository.Login(username, password);
+            if (result.IsSuccess)
+            {
+                FillUserLoginData(username);
+                if(UserLoginedData.UserData.IsAdmin)
+                {
+                    Messenger.Default.Send<PageModel>(new PageModel() { Title = "AdminHome",ViewPath="Admin"}, "OpenHome");
+                }
+                else
+                {
 
-            //}
+                }
+            }
+            else
+            {
+                MessageBox.Show(result.Message);
+            }
         }
+
+        private void FillUserLoginData(string username)
+        {
+            var result = _userRepository.GetUserByUserName(username);
+            if(!result.IsSuccess)
+            {
+                MessageBox.Show(result.Message);
+            }
+             UserLoginedData.UserData = result.Data;
+            
+        }
+
         #endregion
     }
 }

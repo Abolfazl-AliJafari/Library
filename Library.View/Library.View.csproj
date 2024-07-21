@@ -114,7 +114,7 @@
     </Compile>
     <Compile Include="View\Converters\BoleanToColor_MenuConverter.cs" />
     <Compile Include="View\Converters\BoleanToVisibilityConverter.cs" />
-    <Compile Include="LoginPage.xaml.cs">
+    <Compile Include="View\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -158,7 +158,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginPage.xaml">
+    <Page Include="View\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

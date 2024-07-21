@@ -1,5 +1,5 @@
 ﻿
-using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Command;
 using Library.DbService.Repositories;
 using Library.Model.Interfaces.IRepositories;
 using Library.Model.Model.Users;
@@ -129,6 +129,7 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
         #endregion
 
 
+        
         #region Commands
         public RelayCommand AddUserCommand => new RelayCommand(() =>
         {
@@ -144,7 +145,7 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
         {
             return ValidateFeilds();
         });
-        public RelayCommand<UserControl> CloseCommand = new RelayCommand<UserControl>(userControl =>
+        public RelayCommand<UserControl> CloseCommand => new RelayCommand<UserControl>(userControl =>
         {
             if (userControl != null)
             {

@@ -28,19 +28,26 @@ namespace Library.Model.Interfaces.IRepositories
         /// get collection of all user
         /// </summary>
         /// <returns></returns>
-        Task<Result<ObservableCollection<UserShowModel>>> GetAllUsers();
+        Result<ObservableCollection<UserShowModel>> GetAllUsers();
         /// <summary>
         /// Get a user by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<Result<UserAddModel>> GetUserById(int id);
+        Result<UserAddModel> GetUserById(int id);
         /// <summary>
         /// login a user
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        Task<Result<bool>> Login(string username, string password);
+        Result<bool> Login(string username, string password);
+
+        /// <summary>
+        /// get user data by username
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        Result<UserLoginModel> GetUserByUserName(string userName);
     }
 }

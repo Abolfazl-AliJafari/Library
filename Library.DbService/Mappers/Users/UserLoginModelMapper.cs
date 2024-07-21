@@ -18,6 +18,7 @@ namespace Library.DbService.Mappers.Users
             {
                 string fullName = row["FirstName"].ToString() + row["LastName"].ToString();
                 UserLoginModel user = new UserLoginModel(
+                    int.Parse(row["Id"].ToString()),
                     fullName,
                     row["UserName"].ToString(),
                     row["PassWord"].ToString(),
@@ -31,7 +32,8 @@ namespace Library.DbService.Mappers.Users
         {
             string fullName = dataTable.Rows[0]["FirstName"].ToString() + dataTable.Rows[0]["LastName"].ToString();
             return new UserLoginModel(
-                     fullName,
+                      int.Parse(dataTable.Rows[0]["Id"].ToString()),
+                      fullName,
                       dataTable.Rows[0]["UserName"].ToString(),
                       dataTable.Rows[0]["PassWord"].ToString(),
                       (bool)(dataTable.Rows[0]["IsAdmin"] as bool?));

@@ -16,12 +16,12 @@ namespace Library.ViewModel.ViewModel
     {
         //protected virtual RelayCommand<UserControl> SubmitCommand = new RelayCommand<UserControl>((s) => { });
 
-        public RelayCommand<UserControl> CloseCommand = new RelayCommand<UserControl>(userControl =>
-        {
-            if (userControl != null)
-            {
-                Window.GetWindow(userControl).Close();
-            }
-        });
+        //public RelayCommand<UserControl> CloseCommand = new RelayCommand<UserControl>(userControl =>
+        //{
+        //    if (userControl != null)
+        //    {
+        //        Window.GetWindow(userControl).Close();
+        //    }
+        //});
     }
 }

@@ -60,7 +60,7 @@ namespace Library.DbService.Repositories
             }
         }
 
-        public Task<Result<ObservableCollection<UserShowModel>>> GetAllUsers()
+        public Result<ObservableCollection<UserShowModel>> GetAllUsers()
         {
 
             DataTable dataTable = new DataTable();
@@ -72,17 +72,17 @@ namespace Library.DbService.Repositories
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlConnection.Open();
                     dataTable.Load(sqlCommand.ExecuteReader());
-                    return Task.FromResult(Result<ObservableCollection<UserShowModel>>.Success(UserShowModelMapper.DataTableToModels(dataTable)));
+                    return Result<ObservableCollection<UserShowModel>>.Success(UserShowModelMapper.DataTableToModels(dataTable));
                 }
             }
             catch (Exception ex)
             {
                 //ToDo : Implement Log Errors
-                return Task.FromResult(Result<ObservableCollection<UserShowModel>>.Failure(ExceptionMessages.SomethingWentWrong, null));
+                return Result<ObservableCollection<UserShowModel>>.Failure(ExceptionMessages.SomethingWentWrong, null);
             }
         }
 
-        public Task<Result<UserAddModel>> GetUserById(int id)
+        public Result<UserAddModel> GetUserById(int id)
         {
             DataTable dataTable = new DataTable();
             try
@@ -95,17 +95,40 @@ namespace Library.DbService.Repositories
 
                     sqlConnection.Open();
                     dataTable.Load(sqlCommand.ExecuteReader());
-                    return Task.FromResult(Result<UserAddModel>.Success(UserAddModelMapper.DataTableToModel(dataTable)));
+                    return Result<UserAddModel>.Success(UserAddModelMapper.DataTableToModel(dataTable));
                 }
             }
             catch (Exception ex)
             {
                 //ToDo : Implement Log Errors
-                return Task.FromResult(Result<UserAddModel>.Failure(ExceptionMessages.SomethingWentWrong, null));
+                return Result<UserAddModel>.Failure(ExceptionMessages.SomethingWentWrong, null);
             }
         }
 
-        public Task<Result<bool>> Login(string username, string password)
+        public Result<UserLoginModel> GetUserByUserName(string username)
+        {
+            DataTable dataTable = new DataTable();
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(Properties.Settings.Default.SqlServerConnectionString))
+                using (SqlCommand sqlCommand = new SqlCommand("GetUserByUSerName", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    var UserName = sqlCommand.Parameters.Add(new SqlParameter("@VarUserName", username));
+
+                    sqlConnection.Open();
+                    dataTable.Load(sqlCommand.ExecuteReader());
+                    return Result<UserLoginModel>.Success(UserLoginModelMapper.DataTableToModel(dataTable));
+                }
+            }
+            catch (Exception ex)
+            {
+                //ToDo : Implement Log Errors
+                return Result<UserLoginModel>.Failure(ExceptionMessages.SomethingWentWrong, null);
+            }
+        }
+
+        public Result<bool> Login(string username, string password)
         {
             try
             {
@@ -144,14 +167,14 @@ namespace Library.DbService.Repositories
                 if (returnValue == "1")
                 {
 
-                    return Task.FromResult(Result<bool>.Success(true));
+                    return Result<bool>.Success(true);
                 }
-                return Task.FromResult(Result<bool>.Failure(false));
+                return Result<bool>.Failure(false);
             }
             catch (Exception ex)
             {
                 //ToDo : Implement Log Errors
-                return Task.FromResult(Result<bool>.Failure(ExceptionMessages.SomethingWentWrong, false));
+                return Result<bool>.Failure(ExceptionMessages.SomethingWentWrong, false);
             }
         }
 
@@ -176,5 +199,7 @@ namespace Library.DbService.Repositories
                 return Task.FromResult(Result.Failure(ExceptionMessages.SomethingWentWrong));
             }
         }
+
+        
     }
 }
