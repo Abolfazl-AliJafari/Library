@@ -26,7 +26,8 @@ namespace Library.DbService.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=.;Database=Library_Db;Trusted_Connection=True;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.88.20,1433;Initial Catalog=Library_Db;User ID=sa;Password=138" +
+            "51385Ab")]
         public string SqlServerConnectionString {
             get {
                 return ((string)(this["SqlServerConnectionString"]));
