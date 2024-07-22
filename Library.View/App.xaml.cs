@@ -51,7 +51,7 @@ namespace Library.View
                 window.Width = Popup.Width;
                 window.SaveWindowPosition = true;
                 window.HorizontalAlignment = HorizontalAlignment.Center;
-                window.VerticalAlignment = VerticalAlignment.Center;    
+                window.VerticalAlignment = VerticalAlignment.Center;
                 window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 window.ResizeMode = ResizeMode.NoResize;
                 window.ShowCloseButton = false;
@@ -80,10 +80,10 @@ namespace Library.View
             var t = Application.ResourceAssembly.GetTypes()?.FirstOrDefault(x => x.Name.StartsWith(viewName));
             return Activator.CreateInstance(t);
         }
-        public object GetInstanceViewModel(string viewModel)
+        public object GetInstanceViewModel(string viewModel, params object[] args)
         {
             ViewModelDictionary.TryGetValue(viewModel, out Type t);
-            return Activator.CreateInstance(t);
+            return Activator.CreateInstance(t, args);
         }
 
         private void GetAllViewModels(object asm)

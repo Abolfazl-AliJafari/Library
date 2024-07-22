@@ -88,19 +88,36 @@ namespace Library.ViewModel.ViewModel
 
             OpenPopup(popup);
         });
+        public RelayCommand EditUserCommand => new RelayCommand(() =>
+        {
+            object model = new object();
+            var popup = new PopupModel()
+            {
+                Title = "Add",
+                ViewPath = "AddUserPage",
+                ViewModelPath = "AddUserViewModel",
+                Args = new[]
+                {
+                    model
+                }
+            };
+
+            OpenPopup(popup);
+        });
+
         #endregion
         #region Methods
         private ObservableCollection<UserShowModel> GetAllUser()
         {
             var result = _userRepository.GetAllUsers();
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
                 return result.Data;
             }
             return new ObservableCollection<UserShowModel>();
         }
 
-        
+
         #endregion
     }
 }

@@ -129,7 +129,7 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
         #endregion
 
 
-        
+
         #region Commands
         public RelayCommand AddUserCommand => new RelayCommand(() =>
         {
@@ -141,7 +141,7 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
                 UserName,
                 Password,
                 IsAdmin));
-        },() =>
+        }, () =>
         {
             return ValidateFeilds();
         });
@@ -159,15 +159,15 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
         private void AddUser(UserAddModel user)
         {
             var result = _userRepository.AddUser(user);
-            if(!result.Result.IsSuccess)
+            if (!result.Result.IsSuccess)
             {
                 MessageBox.Show(result.Result.Message);
             }
         }
 
-        private bool ValidateFeilds ()
+        private bool ValidateFeilds()
         {
-            if(string.IsNullOrEmpty(FirstName))
+            if (string.IsNullOrEmpty(FirstName))
                 return false;
             if (string.IsNullOrEmpty(LastName))
                 return false;
