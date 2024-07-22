@@ -79,11 +79,14 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AdminBailmentViewModel.cs" />
+    <Compile Include="ViewModel\AdminBooksViewModel.cs" />
     <Compile Include="ViewModel\AdminHomePageViewModel.cs" />
     <Compile Include="ViewModel\AdminUserViewModel.cs" />
     <Compile Include="ViewModel\AdminUser\UserVeiwModels\AddUserViewModel.cs" />
     <Compile Include="ViewModel\BasePopupViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

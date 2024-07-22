@@ -8,6 +8,10 @@ namespace Library.Model.Model.Users
 {
     public class UserLoginModel : BaseModel
     {
+        public UserLoginModel()
+        {
+                
+        }
         public UserLoginModel(
             int id,
             string fullName,

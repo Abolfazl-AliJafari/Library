@@ -16,7 +16,7 @@ namespace Library.DbService.Mappers.Users
             ObservableCollection<UserLoginModel> users = new ObservableCollection<UserLoginModel>();
             foreach (DataRow row in dataTable.Rows)
             {
-                string fullName = row["FirstName"].ToString() + row["LastName"].ToString();
+                string fullName = row["FirstName"].ToString() + " "+ row["LastName"].ToString();
                 UserLoginModel user = new UserLoginModel(
                     int.Parse(row["Id"].ToString()),
                     fullName,
@@ -30,7 +30,7 @@ namespace Library.DbService.Mappers.Users
 
         internal static UserLoginModel DataTableToModel(DataTable dataTable)
         {
-            string fullName = dataTable.Rows[0]["FirstName"].ToString() + dataTable.Rows[0]["LastName"].ToString();
+            string fullName = dataTable.Rows[0]["FirstName"].ToString() +" "+ dataTable.Rows[0]["LastName"].ToString();
             return new UserLoginModel(
                       int.Parse(dataTable.Rows[0]["Id"].ToString()),
                       fullName,

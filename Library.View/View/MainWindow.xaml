@@ -8,7 +8,8 @@
     mc:Ignorable="d" 
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:view="clr-namespace:Library.View.View">
+    xmlns:view="clr-namespace:Library.View.View"
+    WindowState="Maximized">
 
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands>

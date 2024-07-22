@@ -75,7 +75,7 @@
                     </TextBox>
                     <Button
                         IsDefault="True"
-                        Command="{Binding LoginCommand}"
+                        Command="{Binding LoginCommand,UpdateSourceTrigger=PropertyChanged}"
                         Margin="8 4"
                         Content="login">
                     </Button>
