@@ -64,30 +64,15 @@ namespace Library.ViewModel.ViewModel
         }
         #endregion
 
-        private bool _ShowButton;
-        public bool ShowButton
-        {
-            get { return _ShowButton; }
-            set
-            {
-                if (_ShowButton == value)
-                    return;
-                _ShowButton = value;
-                RaisePropertyChanged("ShowButton");
-            }
-        }
-
 
         #region Command
         public RelayCommand LoginCommand => new RelayCommand(() =>
         {
             Login(UserName, Password);
+        }, () =>
+        {
+           return string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password) ? false : true;
         });
-
-        //}, () =>
-        //{
-        //    return string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password) ? false : true;
-        //});
         #endregion
 
 
@@ -102,14 +87,7 @@ namespace Library.ViewModel.ViewModel
                 Password = "";
 
                 FillUserLoginData(username);
-                if (UserLoginedData.UserData.IsAdmin)
-                {
-                    Messenger.Default.Send(UserLoginedData.UserData, "Login");
-                }
-                else
-                {
-
-                }
+                Messenger.Default.Send(UserLoginedData.UserData, "Login");
             }
             else
             {

@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Library.View.View.AdminUser"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AdminBooksPage">
+      Title="AdminBooksPage"
+      FontFamily="IRANSansX">
     <Border Background="White">
 
         <Grid>

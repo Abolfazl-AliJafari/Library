@@ -7,11 +7,29 @@
     xmlns:local="clr-namespace:Library.View.View"
     mc:Ignorable="d" 
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:view="clr-namespace:Library.View.View"
+    xmlns:AdminView="clr-namespace:Library.View.View.AdminUser"
+    xmlns:UserView="clr-namespace:Library.View.View.PublicUser"
     d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
-       
+        <Grid>
+            <materialDesign:Transitioner
+        SelectedIndex="{Binding UserTypeSelectionindex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <AdminView:AdminHomePage
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            x:Name="AdminHome"/>
+                <materialDesign:TransitionerSlide>
+                    <materialDesign:TransitionerSlide.ForwardWipe>
+                        <materialDesign:SlideOutWipe />
+                    </materialDesign:TransitionerSlide.ForwardWipe>
+                    <UserView:UserHomePage
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        x:Name="UserHome"/>
+                </materialDesign:TransitionerSlide>
+            </materialDesign:Transitioner>
+        </Grid>
 
     </Grid>
 </UserControl>

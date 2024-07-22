@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Library.View.View.AdminUser
+namespace Library.View.View.PublicUser
 {
     /// <summary>
-    /// Interaction logic for AdminHomePage.xaml
+    /// Interaction logic for UserHomePage.xaml
     /// </summary>
-    public partial class AdminHomePage : UserControl
+    public partial class UserHomePage : UserControl
     {
-        public AdminHomePage()
+        public UserHomePage()
         {
             InitializeComponent();
         }

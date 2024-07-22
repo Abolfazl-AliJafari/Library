@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Library.Model.Model.Page;
+using Library.Model.Model.Users;
+using Library.Model.StaticData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,11 @@ namespace Library.ViewModel.ViewModel
             Messenger.Default.Register(this, "ShowView", (Page page) =>
             {
                 CurrentPage = page;
+            });
+            Messenger.Default.Register(this, "LoginedUserData", (UserLoginModel userData) =>
+            {
+                FullNameLoginedUser= userData.FullName;
+                UserNameLoginedUser = userData.UserName;
             });
         }
 
@@ -73,7 +80,7 @@ namespace Library.ViewModel.ViewModel
             }
         }
 
-        private int _MenuIndex = -1;
+        private int _MenuIndex = 0;
         public int MenuIndex
         {
             get { return _MenuIndex; }
@@ -115,6 +122,34 @@ namespace Library.ViewModel.ViewModel
                 RaisePropertyChanged("CurrentPage");
             }
         }
+
+
+        private string _fullNameLoginedUser;
+        public string FullNameLoginedUser
+        {
+            get { return _fullNameLoginedUser; }
+            set
+            {
+                if (_fullNameLoginedUser == value)
+                    return;
+                _fullNameLoginedUser = value;
+                RaisePropertyChanged("FullNameLoginedUser");
+            }
+        }
+
+        private string _userNameLoginedUser ;
+        public string UserNameLoginedUser
+        {
+            get { return _userNameLoginedUser; }
+            set
+            {
+                if (_userNameLoginedUser == value)
+                    return;
+                _userNameLoginedUser = value;
+                RaisePropertyChanged("UserNameLoginedUser");
+            }
+        }
+
         #endregion
 
         #region Method
@@ -133,15 +168,15 @@ namespace Library.ViewModel.ViewModel
                 {
                     Title = "کتاب ها",
                     Icon = "Book",
-                    ViewPath = "AdminUsersPage",
-                    ViewModelPath = "AdminBooksPage"
+                    ViewPath = "AdminBooksPage",
+                    ViewModelPath = "AdminBooksViewModel"
                 },
                 new MenuModel()
                 {
                     Title = "امانت داری",
                     Icon = "BeakerOutline",
-                    ViewPath = "AdminUsersPage",
-                    ViewModelPath = "AdminUserViewModel"
+                    ViewPath = "AdminBailmentPage",
+                    ViewModelPath = "AdminBailmentViewModel"
                 },
             };
 

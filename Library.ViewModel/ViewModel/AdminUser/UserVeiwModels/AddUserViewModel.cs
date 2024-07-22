@@ -1,5 +1,5 @@
 ﻿
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using Library.DbService.Repositories;
 using Library.Model.Interfaces.IRepositories;
 using Library.Model.Model.Users;
@@ -128,8 +128,6 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
 
         #endregion
 
-
-        
         #region Commands
         public RelayCommand AddUserCommand => new RelayCommand(() =>
         {
@@ -163,6 +161,10 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
             {
                 MessageBox.Show(result.Result.Message);
             }
+            else
+            {
+                CloseCommand.Execute(this);
+            }
         }
 
         private bool ValidateFeilds ()
@@ -172,8 +174,6 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
             if (string.IsNullOrEmpty(LastName))
                 return false;
             if (string.IsNullOrEmpty(MobileNumber))
-                return false;
-            if (string.IsNullOrEmpty(Email))
                 return false;
             if (string.IsNullOrEmpty(UserName))
                 return false;

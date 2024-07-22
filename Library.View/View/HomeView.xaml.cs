@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library.ViewModel.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace Library.View.View
         public HomeView()
         {
             InitializeComponent();
-
+            DataContext = new HomeViewModel();
         }
     }
 }

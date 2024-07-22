@@ -14,12 +14,12 @@ namespace Library.ViewModel.ViewModel
             Messenger.Default.Register(this, "Login", (UserLoginModel userLoginModel) =>
             {
                 TransitionSelectedIndex = 1;
+                Messenger.Default.Send(userLoginModel.IsAdmin,"Logined");
             });
             Messenger.Default.Register(this, "Logout", (string message) =>
             {
                 TransitionSelectedIndex = 0;
             });
-
         }
 
         private int _TransitionSelectedIndex = 0;

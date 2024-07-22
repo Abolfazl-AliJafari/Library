@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using Library.Model.Model.Page;
 using System;
@@ -16,7 +16,7 @@ namespace Library.ViewModel.ViewModel
     {
         //protected virtual RelayCommand<UserControl> SubmitCommand = new RelayCommand<UserControl>((s) => { });
 
-        //public RelayCommand<UserControl> CloseCommand = new RelayCommand<UserControl>(userControl =>
+        //public RelayCommand<UserControl> CloseCommand => new RelayCommand<UserControl>(userControl =>
         //{
         //    if (userControl != null)
         //    {

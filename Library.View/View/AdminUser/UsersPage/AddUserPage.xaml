@@ -11,7 +11,8 @@
     mc:Ignorable="d" 
     d:DesignHeight="480" d:DesignWidth="400"
     Background="Transparent"
-    FlowDirection="RightToLeft">
+    FlowDirection="RightToLeft"
+    FontFamily="IRANSansX">
     
     <UserControl.Effect>
         <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
@@ -138,7 +139,8 @@
                 FontWeight="ExtraBold"
                 HorizontalAlignment="Center"
                 Content="افزودن"
-                Command="{Binding AddUserCommand}"
+                IsDefault="True"
+                Command="{Binding AddUserCommand,UpdateSourceTrigger=PropertyChanged}"
                 />
 
             <Button
