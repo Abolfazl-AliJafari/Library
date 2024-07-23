@@ -46,6 +46,19 @@ namespace Library.ViewModel.ViewModel
             }
         }
 
+        private object _selectedValue;
+
+        public object SelectedValue
+        {
+            get { return _selectedValue; }
+            set
+            {
+                if (_selectedValue == value)
+                    return;
+                _selectedValue = value;
+                RaisePropertyChanged("SelectedValue");
+            }
+        }
 
         private UserControl _currentPage;
         public UserControl CurrentPage
@@ -90,7 +103,16 @@ namespace Library.ViewModel.ViewModel
         });
         public RelayCommand EditUserCommand => new RelayCommand(() =>
         {
-            object model = new object();
+            UserShowModel castedValue = SelectedValue as UserShowModel;
+            UserUpdateModel model = new UserUpdateModel(
+                castedValue.Id,
+                castedValue.FirstName,
+                castedValue.LastName,
+                castedValue.MobileNumber,
+                castedValue.Email,
+                castedValue.UserName,
+                castedValue.PassWord,
+                castedValue.IsAdmin);
             var popup = new PopupModel()
             {
                 Title = "Add",
@@ -105,6 +127,11 @@ namespace Library.ViewModel.ViewModel
             OpenPopup(popup);
         });
 
+        public RelayCommand RefreshCommand => new RelayCommand(() =>
+        {
+            Users = GetAllUser();
+        });
+
         #endregion
         #region Methods
         private ObservableCollection<UserShowModel> GetAllUser()
@@ -116,8 +143,6 @@ namespace Library.ViewModel.ViewModel
             }
             return new ObservableCollection<UserShowModel>();
         }
-
-
         #endregion
     }
 }

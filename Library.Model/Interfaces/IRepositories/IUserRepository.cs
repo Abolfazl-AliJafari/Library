@@ -49,5 +49,7 @@ namespace Library.Model.Interfaces.IRepositories
         /// <param name="userName"></param>
         /// <returns></returns>
         Result<UserLoginModel> GetUserByUserName(string userName);
+
+        Result UpdateUser(UserUpdateModel user);
     }
 }

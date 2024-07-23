@@ -6,27 +6,36 @@ using System.Threading.Tasks;
 
 namespace Library.Model.Model.Users
 {
-    public class UserShowModel : BaseModel
+    public class UserUpdateModel : BaseModel
     {
-        public UserShowModel(
-           int id,
-           string firstName,
-           string lastName,
-           string mobileNumer,
-           string email,
-           string userName,
-           string passWord,
-           bool isAdmin)
+        #region Contstructor
+
+        #endregion
+        public UserUpdateModel()
+        {
+                
+        }
+
+        public UserUpdateModel(
+            int id,
+            string firstname,
+            string lastname,
+            string mobilenumber,
+            string email,
+            string username,
+            string password,
+            bool isadmin)
         {
             Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            MobileNumber = mobileNumer;
+            FirstName = firstname;
+            LastName = lastname;
+            MobileNumber = mobilenumber;
             Email = email;
-            UserName = userName;
-            PassWord = passWord;
-            IsAdmin = isAdmin;
+            UserName = username;
+            Password = password;
+            IsAdmin = isadmin;
         }
+        #region Properties
         private int _id;
 
         public int Id
@@ -41,11 +50,12 @@ namespace Library.Model.Model.Users
             }
         }
 
+
         private string _firstName;
 
         public string FirstName
         {
-            get { return _firstName; }
+            get { return _firstName;}
             set
             {
                 if (_firstName == value)
@@ -55,19 +65,21 @@ namespace Library.Model.Model.Users
             }
         }
 
-        private string _lastname;
+
+        private string _lastName;
 
         public string LastName
         {
-            get { return _lastname; }
+            get { return _lastName; }
             set
             {
-                if (_lastname == value)
+                if (_lastName == value)
                     return;
-                _lastname = value;
+                _lastName = value;
                 RaisePropertyChanged("LastName");
             }
         }
+
 
         private string _mobileNumber;
 
@@ -83,6 +95,7 @@ namespace Library.Model.Model.Users
             }
         }
 
+
         private string _email;
 
         public string Email
@@ -96,6 +109,7 @@ namespace Library.Model.Model.Users
                 RaisePropertyChanged("Email");
             }
         }
+
 
         private string _userName;
 
@@ -111,24 +125,21 @@ namespace Library.Model.Model.Users
             }
         }
 
-        private string _passWord;
 
-        public string PassWord
+        private string _password;
+
+        public string Password
         {
-            get { return _passWord; }
+            get { return _password; }
             set
             {
-                if (_passWord == value)
+                if (_password == value)
                     return;
-                _passWord = value;
-                RaisePropertyChanged("PassWord");
+                _password = value;
+                RaisePropertyChanged("Password");
             }
         }
 
-
-        /// <summary>
-        /// for detect admin users
-        /// </summary>
         private bool _isAdmin;
 
         public bool IsAdmin
@@ -143,6 +154,6 @@ namespace Library.Model.Model.Users
             }
         }
 
-
+        #endregion
     }
 }

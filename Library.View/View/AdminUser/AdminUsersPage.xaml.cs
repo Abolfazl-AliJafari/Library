@@ -30,5 +30,10 @@ namespace Library.View.View.AdminUser
             //    DialogHost.ShowDialog(page);
             //});
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

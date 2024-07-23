@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -10,7 +9,7 @@ using System.Windows.Data;
 
 namespace Library.View.View.Converters
 {
-    internal class BoleanToVisibilityConverter : IValueConverter
+    public class BoleanToVisibilityEditConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

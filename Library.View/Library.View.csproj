@@ -114,6 +114,7 @@
     </Compile>
     <Compile Include="View\Converters\BoleanToColor_MenuConverter.cs" />
     <Compile Include="View\Converters\BoleanToVisibilityConverter.cs" />
+    <Compile Include="View\Converters\BoleanToVisibilityEditConverter.cs" />
     <Compile Include="View\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>

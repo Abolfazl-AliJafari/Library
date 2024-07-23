@@ -19,9 +19,28 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
         public AddUserViewModel()
         {
             _userRepository = new UserRepository();
+            IsInsert = true;
+            IsEdit = false;
+        }
+
+        public AddUserViewModel(UserUpdateModel user)
+        {
+            _userRepository = new UserRepository();
+            _id = user.Id;
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            MobileNumber = user.MobileNumber;
+            Email = user.Email;
+            UserName = user.UserName;
+            Password = user.Password;
+            IsAdmin = user.IsAdmin;
+            IsEdit = true;
+            IsInsert = false;
         }
 
         #region Properties
+        private int _id;
+        
         private string _firstName;
 
         public string FirstName
@@ -126,6 +145,34 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
             }
         }
 
+        private bool _isInsert;
+
+        public bool IsInsert
+        {
+            get { return _isInsert; }
+            set
+            {
+                if (_isInsert == value)
+                    return;
+                _isInsert = value;
+                RaisePropertyChanged("IsInsert");
+            }
+        }
+
+        private bool _isEdit ;
+
+        public bool IsEdit
+        {
+            get { return _isEdit; }
+            set
+            {
+                if (_isEdit == value)
+                    return;
+                _isEdit = value;
+                RaisePropertyChanged("IsEdit");
+            }
+        }
+
         #endregion
 
 
@@ -134,6 +181,21 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
         public RelayCommand AddUserCommand => new RelayCommand(() =>
         {
             AddUser(new UserAddModel(
+                FirstName,
+                LastName,
+                MobileNumber,
+                Email,
+                UserName,
+                Password,
+                IsAdmin));
+        }, () =>
+        {
+            return ValidateFeilds();
+        });
+        public RelayCommand EditUserCommand => new RelayCommand(() =>
+        {
+            UpdateUser(new UserUpdateModel(
+                _id,
                 FirstName,
                 LastName,
                 MobileNumber,
@@ -162,6 +224,23 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
             if (!result.Result.IsSuccess)
             {
                 MessageBox.Show(result.Result.Message);
+            }
+            else
+            {
+                MessageBox.Show("کاربر با موفقیت ثبت شد.");
+            }
+        }
+
+        private void UpdateUser(UserUpdateModel user)
+        {
+            var result = _userRepository.UpdateUser(user);
+            if(!result.IsSuccess)
+            {
+                MessageBox.Show(result.Message);
+            }
+            else
+            {
+                MessageBox.Show("اطلاعات کاربر با موفقیت ویرایش شد.");
             }
         }
 

@@ -8,16 +8,20 @@
     xmlns:local="clr-namespace:Library.View.View.AdminUser.UsersPage"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:viewmodels="clr-namespace:Library.ViewModel.ViewModel.AdminUser.UserVeiwModels;assembly=Library.ViewModel"
+    xmlns:converters="clr-namespace:Library.View.View.Converters"
     mc:Ignorable="d" 
     d:DesignHeight="480" d:DesignWidth="400"
     Background="Transparent"
     FlowDirection="RightToLeft"
     FontFamily="IRANSansX">
-    
+
     <UserControl.Effect>
         <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
     </UserControl.Effect>
-    
+    <UserControl.Resources>
+        <converters:BoleanToVisibilityConverter x:Key="BoleanToVisibilityConverter"/>
+        <converters:BoleanToVisibilityEditConverter x:Key="BoleanToVisibilityEditConverter"/>
+    </UserControl.Resources>
     <Border
         Background="White"
         BorderThickness="0"
@@ -130,7 +134,6 @@
                     />
             </StackPanel>
             <Button
-                
                 Grid.Row="5"
                 Grid.Column="0"
                 MaxWidth="100"
@@ -141,8 +144,22 @@
                 Content="افزودن"
                 IsDefault="True"
                 Command="{Binding AddUserCommand,UpdateSourceTrigger=PropertyChanged}"
-                />
+                Visibility="{Binding IsInsert,Mode=TwoWay, Converter={StaticResource BoleanToVisibilityConverter},UpdateSourceTrigger=PropertyChanged}"
 
+                />
+            <Button
+                Grid.Row="5"
+                Grid.Column="0"
+                MaxWidth="100"
+                Height="50"
+                FontSize="20"
+                FontWeight="ExtraBold"
+                HorizontalAlignment="Center"
+                Content="ویرایش"
+                IsDefault="True"
+                Command="{Binding EditUserCommand, UpdateSourceTrigger=PropertyChanged}"
+                Visibility="{Binding IsEdit,Mode=TwoWay,Converter={StaticResource BoleanToVisibilityConverter},UpdateSourceTrigger=PropertyChanged}"
+                />
             <Button
                 Grid.Row="5"
                 Grid.Column="1"

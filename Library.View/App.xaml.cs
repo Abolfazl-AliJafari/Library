@@ -39,7 +39,7 @@ namespace Library.View
 
             Messenger.Default.Register(this, "OpenPopup", (PopupModel Popup) =>
             {
-                var viewModel = GetInstanceViewModel(Popup.ViewModelPath);
+                var viewModel = GetInstanceViewModel(Popup.ViewModelPath, Popup.Args);
                 var view = GetInstanceView(Popup.ViewPath);
 
                 (view as UserControl).DataContext = viewModel;

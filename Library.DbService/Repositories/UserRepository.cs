@@ -200,6 +200,49 @@ namespace Library.DbService.Repositories
             }
         }
 
-        
+        public Result UpdateUser(UserUpdateModel user)
+        {
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(Properties.Settings.Default.SqlServerConnectionString))
+                using (SqlCommand sqlCommand = new SqlCommand("UpdateUser", sqlConnection))
+                {
+                    sqlConnection.Open();
+
+                    sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    var Id = sqlCommand.Parameters.Add(new SqlParameter("@Id", user.Id));
+
+                    var FirstName = sqlCommand.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
+                    FirstName.Size = 40;
+
+                    var LastName = sqlCommand.Parameters.Add(new SqlParameter("@LastName", user.LastName));
+                    LastName.Size = 70;
+
+
+                    var MobileNumber = sqlCommand.Parameters.Add(new SqlParameter("@MobileNumber", user.MobileNumber));
+                    MobileNumber.Size = 11;
+
+                    var EmailAddress = sqlCommand.Parameters.Add(new SqlParameter("@EmailAddress", user.Email));
+                    EmailAddress.Size = 150;
+
+                    var UserName = sqlCommand.Parameters.Add(new SqlParameter("@UserName", user.UserName));
+                    UserName.Size = 30;
+
+                    var PassWord = sqlCommand.Parameters.Add(new SqlParameter("@PassWord", user.Password));
+                    PassWord.Size = 16;
+                    var IsAdmin = sqlCommand.Parameters.Add(new SqlParameter("@IsAdmin", user.IsAdmin));
+                    IsAdmin.SqlDbType = SqlDbType.Bit;
+                    sqlCommand.ExecuteNonQuery();
+                }
+
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                //ToDo : Implement Log Errors
+                return Result.Failure(ExceptionMessages.SomethingWentWrong);
+            }
+        }
     }
 }
