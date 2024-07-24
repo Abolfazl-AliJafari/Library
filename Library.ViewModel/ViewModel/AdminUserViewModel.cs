@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using Library.DbService.Repositories;
+using Library.Model.Enumerations;
 using Library.Model.Interfaces.IRepositories;
 using Library.Model.Model.Page;
 using Library.Model.Model.Users;
@@ -126,6 +127,26 @@ namespace Library.ViewModel.ViewModel
 
             OpenPopup(popup);
         });
+        public RelayCommand DeleteUserCommand => new RelayCommand(() =>
+        {
+            UserShowModel castedValue = SelectedValue as UserShowModel;
+            DeleteModel model = new DeleteModel(ModelType.User,castedValue.Id);
+            var popup = new PopupModel()
+            {
+                Title = "Delete",
+                ViewPath = "ConfirmDeletePage",
+                ViewModelPath = "ConfirmDeleteViewModel",
+                Height = 250,
+                Width = 450,
+                Args = new []
+                {
+                    model
+                }
+            };
+
+            OpenPopup(popup);
+        });
+
 
         public RelayCommand RefreshCommand => new RelayCommand(() =>
         {

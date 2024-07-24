@@ -86,6 +86,7 @@
     <Compile Include="ViewModel\AdminUser\UserVeiwModels\AddUserViewModel.cs" />
     <Compile Include="ViewModel\BasePopupViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Components\ConfirmDeleteViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

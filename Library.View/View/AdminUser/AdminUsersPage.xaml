@@ -91,7 +91,7 @@
                     <DataGridCheckBoxColumn 
                     IsReadOnly="True"
                     Width="*"
-                    Binding="{Binding IsAdmin,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                    Binding="{Binding IsAdmin, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                     Header="مدیر"
                     />
                     <DataGridTemplateColumn
@@ -100,7 +100,6 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button
-                                    Name="Edit_Btn"
                                 Content="ویرایش"
                                     Command="{Binding ElementName=form, Path=DataContext.EditUserCommand}"
                                 />
@@ -113,26 +112,10 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button
-                                Content="حذف">
-                                    <!--<Button.CommandParameter>
-
-                                        <StackPanel
-                                         Margin="16">
-                                            <ProgressBar
-                                                Margin="16"
-                                                HorizontalAlignment="Center"
-                                                IsIndeterminate="True"
-                                                Style="{StaticResource MaterialDesignCircularProgressBar}"
-                                                Value="0" />
-                                            <Button
-                                                HorizontalAlignment="Center"
-                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                                CommandParameter="Sample2Cancel"
-                                                Content="CANCEL"
-                                                IsCancel="True"
-                                                Style="{StaticResource MaterialDesignFlatButton}" />
-                                        </StackPanel>
-                                    </Button.CommandParameter>-->
+                                    Content="حذف"
+                                    Command="{Binding ElementName=form,Path=DataContext.DeleteUserCommand}"
+                                    >
+                                    
                                 </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

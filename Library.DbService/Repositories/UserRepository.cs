@@ -178,7 +178,7 @@ namespace Library.DbService.Repositories
             }
         }
 
-        public Task<Result> RemoveUser(int id)
+        public Result RemoveUser(int id)
         {
             try
             {
@@ -187,16 +187,15 @@ namespace Library.DbService.Repositories
                 {
                     sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
                     var Id = sqlCommand.Parameters.Add(new SqlParameter("@VarId", id));
-
                     sqlConnection.Open();
                     sqlCommand.ExecuteReader();
-                    return Task.FromResult(Result.Success());
+                    return Result.Success();
                 }
             }
             catch (Exception ex)
             {
                 //ToDo : Implement Log Errors
-                return Task.FromResult(Result.Failure(ExceptionMessages.SomethingWentWrong));
+                return Result.Failure(ExceptionMessages.SomethingWentWrong);
             }
         }
 

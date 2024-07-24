@@ -49,7 +49,7 @@ namespace Library.View
                 window.Topmost = true;
                 window.Height = Popup.Height;
                 window.Width = Popup.Width;
-                window.SaveWindowPosition = true;
+                //window.SaveWindowPosition = true;
                 window.HorizontalAlignment = HorizontalAlignment.Center;
                 window.VerticalAlignment = VerticalAlignment.Center;
                 window.WindowStartupLocation = WindowStartupLocation.CenterScreen;

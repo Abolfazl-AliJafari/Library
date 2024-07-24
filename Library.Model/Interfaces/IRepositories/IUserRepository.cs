@@ -23,7 +23,7 @@ namespace Library.Model.Interfaces.IRepositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<Result> RemoveUser(int  id);
+        Result RemoveUser(int  id);
         /// <summary>
         /// get collection of all user
         /// </summary>

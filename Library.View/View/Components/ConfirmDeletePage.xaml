@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Library.View.View.Components.ConfirmDeletePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Library.View.View.Components"
+             mc:Ignorable="d" 
+             FlowDirection="RightToLeft"
+             FontFamily="IRANSANX"
+             Name="userControl">
+    <Border
+        Background="White"
+        CornerRadius="8">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Text="از حذف مطمعن هستید؟"
+                FontSize="35"
+                FontWeight="ExtraBlack"
+                VerticalAlignment="Center"
+                Margin="8 8"
+                LineHeight="auto"
+                />
+
+            <Grid
+                Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button 
+                    Grid.Column="1"
+                    Content="انصراف"
+                    MaxWidth="150"
+                    Height="50"
+                    Background="Transparent"
+                    Foreground="Red"
+                    BorderThickness="0"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{Binding ElementName=userControl}"
+                    Margin="8 8"
+                />
+                <Button
+                    Grid.Column="0"
+                    Content="تایید"
+                    MaxWidth="150"
+                    Height="50"
+                    BorderThickness="0"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="userControl"
+                    Margin="8 8"/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

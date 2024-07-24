@@ -112,6 +112,9 @@
     <Compile Include="View\AdminUser\UsersPage\AddUserPage.xaml.cs">
       <DependentUpon>AddUserPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Components\ConfirmDeletePage.xaml.cs">
+      <DependentUpon>ConfirmDeletePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Converters\BoleanToColor_MenuConverter.cs" />
     <Compile Include="View\Converters\BoleanToVisibilityConverter.cs" />
     <Compile Include="View\Converters\BoleanToVisibilityEditConverter.cs" />
@@ -165,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AdminUser\AdminHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\ConfirmDeletePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

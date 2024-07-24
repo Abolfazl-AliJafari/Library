@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumerations\ModelType.cs" />
     <Compile Include="Helper\Exceptions\ExceptionMessages.cs" />
     <Compile Include="Helper\Result.cs" />
     <Compile Include="Interfaces\IRepositories\IUserRepository.cs" />
+    <Compile Include="Model\Page\DeleteModel.cs" />
     <Compile Include="Model\Page\MenuModel.cs" />
     <Compile Include="Model\Page\PageModel.cs" />
     <Compile Include="Model\Page\PopupModel.cs" />

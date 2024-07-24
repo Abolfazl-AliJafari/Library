@@ -24,7 +24,7 @@ namespace Library.DbService.Mappers.Users
                     row["EmailAddress"].ToString(),
                     row["UserName"].ToString(),
                     row["PassWord"].ToString(),
-                    (bool)(dataTable.Rows[0]["IsAdmin"] as bool?));
+                    (bool)(row["IsAdmin"] as bool?));
                 users.Add(user);
             }
             return users;

@@ -1,15 +1,9 @@
-﻿
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.CommandWpf;
 using Library.DbService.Repositories;
+using Library.Model.Helper.Exceptions;
 using Library.Model.Interfaces.IRepositories;
 using Library.Model.Model.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
 {
@@ -207,13 +201,6 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
         {
             return ValidateFeilds();
         });
-        public RelayCommand<UserControl> CloseCommand => new RelayCommand<UserControl>(userControl =>
-        {
-            if (userControl != null)
-            {
-                Window.GetWindow(userControl).Close();
-            }
-        });
         #endregion
 
 
@@ -227,7 +214,7 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
             }
             else
             {
-                MessageBox.Show("کاربر با موفقیت ثبت شد.");
+                MessageBox.Show(ExceptionMessages.InsertSuccess("کاربر"));
             }
         }
 
@@ -240,7 +227,7 @@ namespace Library.ViewModel.ViewModel.AdminUser.UserVeiwModels
             }
             else
             {
-                MessageBox.Show("اطلاعات کاربر با موفقیت ویرایش شد.");
+                MessageBox.Show(ExceptionMessages.UpdateSuccess("کاربر"));
             }
         }
 
