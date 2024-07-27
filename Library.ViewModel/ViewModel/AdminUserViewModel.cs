@@ -5,6 +5,7 @@ using Library.Model.Enumerations;
 using Library.Model.Interfaces.IRepositories;
 using Library.Model.Model.Page;
 using Library.Model.Model.Users;
+using Library.ViewModel.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -130,7 +131,7 @@ namespace Library.ViewModel.ViewModel
         public RelayCommand DeleteUserCommand => new RelayCommand(() =>
         {
             UserShowModel castedValue = SelectedValue as UserShowModel;
-            DeleteModel model = new DeleteModel(ModelType.User,castedValue.Id);
+            DeleteModel model = new DeleteModel(ModelType.User, castedValue.Id);
             var popup = new PopupModel()
             {
                 Title = "Delete",
@@ -138,7 +139,7 @@ namespace Library.ViewModel.ViewModel
                 ViewModelPath = "ConfirmDeleteViewModel",
                 Height = 250,
                 Width = 450,
-                Args = new []
+                Args = new[]
                 {
                     model
                 }
@@ -153,16 +154,39 @@ namespace Library.ViewModel.ViewModel
             Users = GetAllUser();
         });
 
+
+        public RelayCommand GetReportCommand => new RelayCommand(() =>
+        {
+            GetReport();
+        });
         #endregion
         #region Methods
         private ObservableCollection<UserShowModel> GetAllUser()
         {
             var result = _userRepository.GetAllUsers();
-            if (result.IsSuccess)
+            if (!result.IsSuccess)
             {
-                return result.Data;
+                MessageBox.Show(result.Message);
+                return new ObservableCollection<UserShowModel>();
+
             }
-            return new ObservableCollection<UserShowModel>();
+            return result.Data;
+        }
+
+        private void GetReport()
+        {
+            var users = GetAllUser();
+            var rpt = StimulsoftHelper.GetReport("Report.mrt");
+            rpt.RegData("User_Tbl", users.Select(p => new
+            {
+                p.FirstName,
+                p.LastName,
+                p.MobileNumber,
+                p.UserName,
+                p.IsAdmin
+            }));
+            rpt.Show();
+
         }
         #endregion
     }

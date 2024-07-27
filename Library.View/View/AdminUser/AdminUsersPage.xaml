@@ -42,6 +42,7 @@
                     Height="40"
                     Margin="8 0"
                     Content="دریافت گزارش"
+                    Command="{Binding GetReportCommand}"
                 />
                 <Button
                     Grid.Column="2"
