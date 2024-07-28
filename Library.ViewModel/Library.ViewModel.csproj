@@ -104,6 +104,7 @@
     <Compile Include="ViewModel\AdminBooksViewModel.cs" />
     <Compile Include="ViewModel\AdminHomePageViewModel.cs" />
     <Compile Include="ViewModel\AdminUserViewModel.cs" />
+    <Compile Include="ViewModel\AdminUser\BookViewModels\AddBookViewModel.cs" />
     <Compile Include="ViewModel\AdminUser\UserVeiwModels\AddUserViewModel.cs" />
     <Compile Include="ViewModel\BasePopupViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />

@@ -3,18 +3,132 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:viewmodels="clr-namespace:Library.ViewModel.ViewModel;assembly=Library.ViewModel"
       xmlns:local="clr-namespace:Library.View.View.AdminUser"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AdminBooksPage"
-      FontFamily="IRANSansX">
+      Title="AdminUsersPage"
+      FlowDirection="RightToLeft"
+      x:Name="form"
+      FontFamily="IRANSansX"
+>
     <Border Background="White">
-
         <Grid>
-            <TextBlock 
-                Text="Books" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Center"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid
+            Grid.Row="0"
+            FlowDirection="RightToLeft">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="1.25*"/>
+                    <ColumnDefinition Width="1.25*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock 
+                    Grid.Column="0"
+                    Text="کتاب ها"
+                    FontSize="35"
+                    FontWeight="ExtraBlack"
+                    VerticalAlignment="Center"
+                    Margin="8 0 0 0"
+                />
+                <Button
+                    Grid.Column="1"
+                    Height="40"
+                    Margin="8 0"
+                    Content="دریافت گزارش"
+                    Command="{Binding GetReportCommand}"
+                />
+                <Button
+                    Grid.Column="2"
+                    Height="40"
+                    Margin="8 0"
+                    Content="افزودن کتاب" 
+                    Command="{Binding AddBookCommand}"
+                />
+                <Button
+                    Grid.Column="3"
+                    Height="40"
+                    Margin="8 0"
+                    Command="{Binding RefreshCommand}"
+                >
+                    <Button.Content>
+                        <materialDesign:PackIcon 
+                            Kind="Refresh"
+                            />
+                    </Button.Content>
+                </Button>
+            </Grid>
+            <DataGrid
+                SelectedValue="{Binding SelectedValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                AutoGenerateColumns="False"
+                Padding="8 4"
+                Grid.Row="1"
+                ItemsSource="{Binding Books,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        IsReadOnly="True"
+                        Width="2*"
+                        Binding="{Binding BookCode,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                        Header="کد کتاب"
+                        />
+                    <DataGridTextColumn 
+                        IsReadOnly="True"
+                        Width="2*"
+                        Binding="{Binding BookName,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                        Header="نام کتاب"
+                    />
+                    <DataGridTextColumn 
+                        IsReadOnly="True"
+                        Width="2*"
+                        Binding="{Binding WriterName,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                        Header="نویسنده"
+                    />
+                    <DataGridTextColumn
+                        IsReadOnly="True"
+                        Width="2*"
+                        Binding="{Binding PrintYear,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                        Header="سال چاپ"
+                    />
+                    <DataGridTextColumn 
+                        IsReadOnly="True"
+                        Width="*"
+                        Binding="{Binding Inventory, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        Header="موجودی"
+                    />
+                    <DataGridTemplateColumn
+                        Width="1.5*"
+                        MaxWidth="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                Content="ویرایش"
+                                    Command="{Binding ElementName=form, Path=DataContext.EditBookCommand}"
+                                />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn
+                    Width="1.5*"
+                    MaxWidth="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Content="حذف"
+                                    Command="{Binding ElementName=form,Path=DataContext.DeleteBookCommand}"
+                                    >
+
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Border>
 </Page>

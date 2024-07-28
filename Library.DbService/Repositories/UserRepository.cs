@@ -4,12 +4,9 @@ using Library.Model.Helper.Exceptions;
 using Library.Model.Interfaces.IRepositories;
 using Library.Model.Model.Users;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Library.DbService.Repositories
@@ -62,7 +59,6 @@ namespace Library.DbService.Repositories
 
         public Result<ObservableCollection<UserShowModel>> GetAllUsers()
         {
-
             DataTable dataTable = new DataTable();
             try
             {
@@ -91,7 +87,7 @@ namespace Library.DbService.Repositories
                 using (SqlCommand sqlCommand = new SqlCommand("GetUserById", sqlConnection))
                 {
                     sqlCommand.CommandType = CommandType.StoredProcedure;
-                    var UserName = sqlCommand.Parameters.Add(new SqlParameter("@VarId", id));
+                    var Id = sqlCommand.Parameters.Add(new SqlParameter("@VarId", id));
 
                     sqlConnection.Open();
                     dataTable.Load(sqlCommand.ExecuteReader());
@@ -111,7 +107,7 @@ namespace Library.DbService.Repositories
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(Properties.Settings.Default.SqlServerConnectionString))
-                using (SqlCommand sqlCommand = new SqlCommand("GetUserByUSerName", sqlConnection))
+                using (SqlCommand sqlCommand = new SqlCommand("GetUserByUserName", sqlConnection))
                 {
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     var UserName = sqlCommand.Parameters.Add(new SqlParameter("@VarUserName", username));
@@ -186,7 +182,7 @@ namespace Library.DbService.Repositories
                 using (SqlCommand sqlCommand = new SqlCommand("DeleteUser", sqlConnection))
                 {
                     sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
-                    var Id = sqlCommand.Parameters.Add(new SqlParameter("@VarId", id));
+                    var Id = sqlCommand.Parameters.Add(new SqlParameter("@VarUserId", id));
                     sqlConnection.Open();
                     sqlCommand.ExecuteReader();
                     return Result.Success();

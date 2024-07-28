@@ -34,9 +34,28 @@ namespace Library.ViewModel.ViewModel
             {
                 UserName = userName;
             }
+
+            if(string.IsNullOrEmpty(UserName))
+            {
+                FocusedElement = "Password_Txt";
+            }
         }
 
         #region Property
+        private string _focusedElement = "Username_Txt";
+
+        public string FocusedElement
+        {
+            get { return _focusedElement; }
+            set
+            {
+                if (_focusedElement == value)
+                    return;
+                _focusedElement = value;
+                RaisePropertyChanged("FocusedElement");
+            }
+        }
+
         private string _UserName;
         public string UserName
         {

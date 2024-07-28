@@ -1,6 +1,4 @@
-﻿using Library.ViewModel.ViewModel;
-using MahApps.Metro.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,20 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Library.View.View
+namespace Library.View.View.AdminUser.BooksPage
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddBookPage.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class AddBookPage : UserControl
     {
-        public MainWindow()
+        public AddBookPage()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
-            
         }
     }
 }

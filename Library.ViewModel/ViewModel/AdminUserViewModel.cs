@@ -167,8 +167,6 @@ namespace Library.ViewModel.ViewModel
             if (!result.IsSuccess)
             {
                 MessageBox.Show(result.Message);
-                return new ObservableCollection<UserShowModel>();
-
             }
             return result.Data;
         }
@@ -177,7 +175,7 @@ namespace Library.ViewModel.ViewModel
         {
             var users = GetAllUser();
             var rpt = StimulsoftHelper.GetReport("Report.mrt");
-            rpt.RegData("User_Tbl", users.Select(p => new
+            rpt.RegData("User_Tbl", Users.Select(p => new
             {
                 p.FirstName,
                 p.LastName,
@@ -186,7 +184,6 @@ namespace Library.ViewModel.ViewModel
                 p.IsAdmin
             }));
             rpt.Show();
-
         }
         #endregion
     }

@@ -2,6 +2,7 @@
 using Library.DbService.Repositories;
 using Library.Model.Enumerations;
 using Library.Model.Helper;
+using Library.Model.Helper.Exceptions;
 using Library.Model.Model.Page;
 using System.Windows;
 
@@ -27,6 +28,7 @@ namespace Library.ViewModel.ViewModel.Components
                     //Header = "آیا از حذف کاربر مطمعن هستید؟";
                     break;
                 case ModelType.Book:
+                    _repository = new BookRepository();
                     //Header = "آیا از حذف کتاب مطمعن هستید؟";
                     break;
                 case ModelType.Bailment:
@@ -63,14 +65,19 @@ namespace Library.ViewModel.ViewModel.Components
         private void Delete(int id)
         {
             Result result = Result.Failure();
+            string target = "";
             switch (_type)
             {
                 case ModelType.User:
                     result = (_repository as UserRepository).RemoveUser(id);
+                    target = "کاربر";
                     break;
                 case ModelType.Book:
+                    result = (_repository as BookRepository).RemoveBook(id);
+                    target = "کتاب";
                     break;
                 case ModelType.Bailment:
+                    target = "امانت";
                     break;
                 default:
                     break;
@@ -79,6 +86,10 @@ namespace Library.ViewModel.ViewModel.Components
             if (!result.IsSuccess)
             {
                 MessageBox.Show(result.Message);
+            }
+            else
+            {
+                MessageBox.Show(ExceptionMessages.DeleteSuccess(target));
             }
         }
 	    #endregion

@@ -9,7 +9,8 @@
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:view="clr-namespace:Library.View.View"
-    WindowState="Maximized">
+    WindowState="Maximized"
+    FocusManager.FocusedElement="{Binding ElementName=login}">
 
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands>
@@ -20,8 +21,8 @@
             </StackPanel>
         </controls:WindowCommands>
     </controls:MetroWindow.LeftWindowCommands>
-        
-    <Grid>
+
+    <Grid >
         <materialDesign:Transitioner
             SelectedIndex="{Binding TransitionSelectedIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
             <view:LoginPage

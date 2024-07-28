@@ -28,7 +28,20 @@
         <Grid.Resources>
 
             <converters:BoleanToVisibilityConverter x:Key="BoleanToVisibilityConverter"/>
+            <converters:TextEmptyToBooleanConverter x:Key="TextEmptyToBooleanConverter"/>
         </Grid.Resources>
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding UserName, Converter={StaticResource TextEmptyToBooleanConverter}}" Value="True">
+                        <Setter Property="FocusManager.FocusedElement" Value="{Binding ElementName=Username_Txt}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding UserName, Converter={StaticResource TextEmptyToBooleanConverter}}" Value="False">
+                        <Setter Property="FocusManager.FocusedElement" Value="{Binding ElementName=Password_Txt}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition
@@ -64,15 +77,16 @@
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Margin="8 4"
+                        Name="Username_Txt"
                         Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     </TextBox>
                     <TextBox
                         materialDesign:HintAssist.Hint="Password"
-                        Text="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        Name="Password_Txt"
+                        Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
-                        Margin="8 4">
-                    </TextBox>
+                        Margin="8 4"/>
                     <Button
                         IsDefault="True"
                         Command="{Binding LoginCommand,UpdateSourceTrigger=PropertyChanged}"
